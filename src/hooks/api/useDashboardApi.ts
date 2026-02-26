@@ -1,4 +1,4 @@
-// src/hooks/api/useDashboardApi.ts
+
 import { useQuery, useQueryClient, type UseQueryOptions } from '@tanstack/react-query'
 import { fetcher } from '../../utils/api/apiClient'
 import { API_ENDPOINTS } from '../../constant/apiEndpoints'

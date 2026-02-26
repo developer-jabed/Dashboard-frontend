@@ -1,8 +1,15 @@
 // src/pages/dashboard/users.tsx
-
 import { useMemo, useState } from 'react'
+import { useUsersList } from '@/hooks/api/useDashboardApi'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
@@ -10,23 +17,9 @@ import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Search } from 'lucide-react'
 
-const mockUsers = [
-  { id: 1, name: 'John Doe', email: 'john@example.com', role: 'admin', status: 'active', joined: '2024-01-12' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'user', status: 'inactive', joined: '2024-02-10' },
-  { id: 3, name: 'Michael Lee', email: 'michael@example.com', role: 'manager', status: 'active', joined: '2024-03-05' },
-  { id: 4, name: 'Sarah Kim', email: 'sarah@example.com', role: 'user', status: 'active', joined: '2024-03-22' },
-  { id: 5, name: 'David Brown', email: 'david@example.com', role: 'user', status: 'inactive', joined: '2024-04-01' },
-  { id: 6, name: 'Emily Davis', email: 'emily@example.com', role: 'admin', status: 'active', joined: '2024-04-18' },
-  { id: 7, name: 'Robert Wilson', email: 'robert@example.com', role: 'manager', status: 'active', joined: '2024-05-02' },
-]
-
 export default function UserPage() {
-  const users = mockUsers
-  const isPending = false
-  const isError = false
-
+  const { data: users = [], isPending, isError } = useUsersList()
   const [search, setSearch] = useState('')
-  const [role, setRole] = useState('all')
   const [status, setStatus] = useState('all')
   const [sortBy, setSortBy] = useState('latest')
   const [currentPage, setCurrentPage] = useState(1)
@@ -36,14 +29,11 @@ export default function UserPage() {
     let filtered = [...users]
 
     if (search) {
-      filtered = filtered.filter((u) =>
-        u.name.toLowerCase().includes(search.toLowerCase()) ||
-        u.email.toLowerCase().includes(search.toLowerCase())
+      filtered = filtered.filter(
+        (u) =>
+          u.name.toLowerCase().includes(search.toLowerCase()) ||
+          u.email.toLowerCase().includes(search.toLowerCase())
       )
-    }
-
-    if (role !== 'all') {
-      filtered = filtered.filter((u) => u.role === role)
     }
 
     if (status !== 'all') {
@@ -55,7 +45,7 @@ export default function UserPage() {
     }
 
     return filtered
-  }, [users, search, role, status, sortBy])
+  }, [users, search, status, sortBy])
 
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage)
 
@@ -120,18 +110,6 @@ export default function UserPage() {
         </CardHeader>
 
         <CardContent className="flex flex-wrap gap-4">
-          <Select value={role} onValueChange={(val) => { setRole(val); setCurrentPage(1) }}>
-            <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder="Role" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Roles</SelectItem>
-              <SelectItem value="admin">Admin</SelectItem>
-              <SelectItem value="manager">Manager</SelectItem>
-              <SelectItem value="user">User</SelectItem>
-            </SelectContent>
-          </Select>
-
           <Select value={status} onValueChange={(val) => { setStatus(val); setCurrentPage(1) }}>
             <SelectTrigger className="w-[150px]">
               <SelectValue placeholder="Status" />
@@ -163,7 +141,6 @@ export default function UserPage() {
                 <TableHead>ID</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
-                <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Joined</TableHead>
               </TableRow>
@@ -172,43 +149,24 @@ export default function UserPage() {
             <TableBody>
               {paginatedUsers.map((user) => (
                 <TableRow key={user.id} className="hover:bg-muted/40 transition">
-                  <TableCell className="font-semibold text-primary">
-                    {user.id}
-                  </TableCell>
-                  <TableCell className="font-medium">
-                    {user.name}
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">
-                    {user.email}
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant="secondary">
-                      {user.role}
-                    </Badge>
-                  </TableCell>
+                  <TableCell className="font-semibold text-primary">{user.id}</TableCell>
+                  <TableCell className="font-medium">{user.name}</TableCell>
+                  <TableCell className="text-muted-foreground">{user.email}</TableCell>
                   <TableCell>
                     <Badge
-                      className={
-                        user.status === 'active'
-                          ? 'bg-green-600 text-white'
-                          : 'bg-gray-500 text-white'
-                      }
+                      className={user.status === 'active' ? 'bg-green-600 text-white' : 'bg-gray-500 text-white'}
                     >
                       {user.status}
                     </Badge>
                   </TableCell>
-                  <TableCell>
-                    {user.joined}
-                  </TableCell>
+                  <TableCell>{user.joinDate}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
 
           {filteredUsers.length === 0 && (
-            <p className="text-center py-10 text-muted-foreground">
-              No users found
-            </p>
+            <p className="text-center py-10 text-muted-foreground">No users found</p>
           )}
         </CardContent>
 
