@@ -1,65 +1,65 @@
-// src/pages/dashboard/products.tsx
+// src/pages/dashboard/users.tsx
 
 import { useMemo, useState } from 'react'
-import { useProductsList } from '@/hooks/api/useDashboardApi'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Skeleton } from '@/components/ui/skeleton'
 import { Search } from 'lucide-react'
 
-export default function ProductsPage() {
-  const { data: products = [], isPending, isError } = useProductsList()
+const mockUsers = [
+  { id: 1, name: 'John Doe', email: 'john@example.com', role: 'admin', status: 'active', joined: '2024-01-12' },
+  { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'user', status: 'inactive', joined: '2024-02-10' },
+  { id: 3, name: 'Michael Lee', email: 'michael@example.com', role: 'manager', status: 'active', joined: '2024-03-05' },
+  { id: 4, name: 'Sarah Kim', email: 'sarah@example.com', role: 'user', status: 'active', joined: '2024-03-22' },
+  { id: 5, name: 'David Brown', email: 'david@example.com', role: 'user', status: 'inactive', joined: '2024-04-01' },
+  { id: 6, name: 'Emily Davis', email: 'emily@example.com', role: 'admin', status: 'active', joined: '2024-04-18' },
+  { id: 7, name: 'Robert Wilson', email: 'robert@example.com', role: 'manager', status: 'active', joined: '2024-05-02' },
+]
+
+export default function UserPage() {
+  const users = mockUsers
+  const isPending = false
+  const isError = false
 
   const [search, setSearch] = useState('')
-  const [category, setCategory] = useState('all')
+  const [role, setRole] = useState('all')
+  const [status, setStatus] = useState('all')
   const [sortBy, setSortBy] = useState('latest')
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(5)
 
-  const filteredProducts = useMemo(() => {
-    let filtered = [...products]
+  const filteredUsers = useMemo(() => {
+    let filtered = [...users]
 
     if (search) {
-      filtered = filtered.filter((p) =>
-        p.name.toLowerCase().includes(search.toLowerCase())
+      filtered = filtered.filter((u) =>
+        u.name.toLowerCase().includes(search.toLowerCase()) ||
+        u.email.toLowerCase().includes(search.toLowerCase())
       )
     }
 
-    if (category !== 'all') {
-      filtered = filtered.filter((p) => p.category === category)
+    if (role !== 'all') {
+      filtered = filtered.filter((u) => u.role === role)
     }
 
-    if (sortBy === 'priceLow') {
-      filtered.sort((a, b) => a.price - b.price)
-    } else if (sortBy === 'priceHigh') {
-      filtered.sort((a, b) => b.price - a.price)
-    } else if (sortBy === 'sales') {
-      filtered.sort((a, b) => b.sales - a.sales)
+    if (status !== 'all') {
+      filtered = filtered.filter((u) => u.status === status)
+    }
+
+    if (sortBy === 'name') {
+      filtered.sort((a, b) => a.name.localeCompare(b.name))
     }
 
     return filtered
-  }, [products, search, category, sortBy])
+  }, [users, search, role, status, sortBy])
 
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage)
 
-  const paginatedProducts = filteredProducts.slice(
+  const paginatedUsers = filteredUsers.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   )
@@ -68,7 +68,7 @@ export default function ProductsPage() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Products Overview</CardTitle>
+          <CardTitle>Users Overview</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -83,10 +83,10 @@ export default function ProductsPage() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Products Overview</CardTitle>
+          <CardTitle>Users Overview</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-destructive">Failed to load products</p>
+          <p className="text-destructive">Failed to load users</p>
         </CardContent>
       </Card>
     )
@@ -94,12 +94,11 @@ export default function ProductsPage() {
 
   return (
     <div className="space-y-6">
-      <Card className="shadow-sm border bg-background/50">
+      <Card className="shadow-sm border bg-background">
         <CardHeader className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-
           <div className="space-y-1">
-            <CardTitle className="text-2xl font-semibold tracking-tight text-foreground">
-              Products Overview
+            <CardTitle className="text-2xl font-semibold tracking-tight">
+              Users Overview
             </CardTitle>
             <p className="text-sm text-muted-foreground">
               This is static demo data. API pagination & backend filtering will be implemented later.
@@ -110,7 +109,7 @@ export default function ProductsPage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
             <Input
               className="pl-9 h-10 bg-muted/40 border-muted focus-visible:ring-1 focus-visible:ring-primary"
-              placeholder="Search product..."
+              placeholder="Search user..."
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value)
@@ -118,45 +117,39 @@ export default function ProductsPage() {
               }}
             />
           </div>
-
         </CardHeader>
-      </Card>
 
-      <Card className="shadow-lg">
-        <CardContent className="flex flex-wrap gap-4 py-6">
-          <Select
-            value={category}
-            onValueChange={(val) => {
-              setCategory(val)
-              setCurrentPage(1)
-            }}
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Category" />
+        <CardContent className="flex flex-wrap gap-4">
+          <Select value={role} onValueChange={(val) => { setRole(val); setCurrentPage(1) }}>
+            <SelectTrigger className="w-[150px]">
+              <SelectValue placeholder="Role" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="subscription">Subscription</SelectItem>
-              <SelectItem value="one-time">One-time</SelectItem>
-              <SelectItem value="addon">Addon</SelectItem>
+              <SelectItem value="all">All Roles</SelectItem>
+              <SelectItem value="admin">Admin</SelectItem>
+              <SelectItem value="manager">Manager</SelectItem>
+              <SelectItem value="user">User</SelectItem>
             </SelectContent>
           </Select>
 
-          <Select
-            value={sortBy}
-            onValueChange={(val) => {
-              setSortBy(val)
-              setCurrentPage(1)
-            }}
-          >
-            <SelectTrigger className="w-[180px]">
+          <Select value={status} onValueChange={(val) => { setStatus(val); setCurrentPage(1) }}>
+            <SelectTrigger className="w-[150px]">
+              <SelectValue placeholder="Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Status</SelectItem>
+              <SelectItem value="active">Active</SelectItem>
+              <SelectItem value="inactive">Inactive</SelectItem>
+            </SelectContent>
+          </Select>
+
+          <Select value={sortBy} onValueChange={(val) => { setSortBy(val); setCurrentPage(1) }}>
+            <SelectTrigger className="w-[150px]">
               <SelectValue placeholder="Sort By" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="latest">Latest</SelectItem>
-              <SelectItem value="priceLow">Price: Low → High</SelectItem>
-              <SelectItem value="priceHigh">Price: High → Low</SelectItem>
-              <SelectItem value="sales">Top Sales</SelectItem>
+              <SelectItem value="name">Name</SelectItem>
             </SelectContent>
           </Select>
         </CardContent>
@@ -169,46 +162,52 @@ export default function ProductsPage() {
               <TableRow>
                 <TableHead>ID</TableHead>
                 <TableHead>Name</TableHead>
-                <TableHead>Price</TableHead>
-                <TableHead>Sales</TableHead>
-                <TableHead>Category</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Joined</TableHead>
               </TableRow>
             </TableHeader>
 
             <TableBody>
-              {paginatedProducts.map((product) => (
-                <TableRow key={product.id} className="hover:bg-muted/40 transition">
-                  <TableCell className="font-semibold text-indigo-600">
-                    {product.id}
+              {paginatedUsers.map((user) => (
+                <TableRow key={user.id} className="hover:bg-muted/40 transition">
+                  <TableCell className="font-semibold text-primary">
+                    {user.id}
                   </TableCell>
                   <TableCell className="font-medium">
-                    {product.name}
+                    {user.name}
                   </TableCell>
-                  <TableCell className="text-green-600 font-semibold">
-                    ${product.price.toFixed(2)}
+                  <TableCell className="text-muted-foreground">
+                    {user.email}
                   </TableCell>
-                  <TableCell className="text-blue-600 font-semibold">
-                    {product.sales.toLocaleString()}
+                  <TableCell>
+                    <Badge variant="secondary">
+                      {user.role}
+                    </Badge>
                   </TableCell>
                   <TableCell>
                     <Badge
                       className={
-                        product.category === 'subscription'
-                          ? 'bg-indigo-600 text-white'
-                          : 'bg-pink-600 text-white'
+                        user.status === 'active'
+                          ? 'bg-green-600 text-white'
+                          : 'bg-gray-500 text-white'
                       }
                     >
-                      {product.category}
+                      {user.status}
                     </Badge>
+                  </TableCell>
+                  <TableCell>
+                    {user.joined}
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
 
-          {filteredProducts.length === 0 && (
+          {filteredUsers.length === 0 && (
             <p className="text-center py-10 text-muted-foreground">
-              No products found
+              No users found
             </p>
           )}
         </CardContent>

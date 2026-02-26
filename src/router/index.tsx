@@ -4,6 +4,7 @@ import ProtectedRoute from './ProtectedRoute'
 import DashboardLayout from '@/Layout/DashboardLayout'
 import LoginPage from '@/pages/auth/Login'
 import ProductsPage from '@/pages/Dashboard/Product'
+import UserPage from '@/pages/Dashboard/User'
 
 
 export const router = createBrowserRouter([
@@ -27,7 +28,7 @@ export const router = createBrowserRouter([
             element: <OverviewPage />,
           },
           // Add more routes here later
-          // { path: 'users',     element: <UsersPage /> },
+          { path: 'users',     element: <UserPage /> },
           // { path: 'analytics', element: <AnalyticsPage /> },
           { path: 'products',  element: <ProductsPage /> },
         ],

@@ -273,9 +273,9 @@ export default function OverviewPage() {
                   </p>
                 </div>
               </div>
-              <span className="text-xs text-muted-foreground">
+              {/* <span className="text-xs text-muted-foreground">
                 {new Date(user.updatedAt).toLocaleTimeString() || "—"}
-              </span>
+              </span> */}
             </div>
           ))}
         </CardContent>
