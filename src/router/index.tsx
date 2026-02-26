@@ -1,9 +1,10 @@
-// src/router/index.ts
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import OverviewPage from '@/pages/Dashboard/Overview'
 import ProtectedRoute from './ProtectedRoute'
 import DashboardLayout from '@/Layout/DashboardLayout'
-import LoginPage from '@/pages/auth/login'
+import LoginPage from '@/pages/auth/Login'
+import ProductsPage from '@/pages/Dashboard/Product'
+
 
 export const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ export const router = createBrowserRouter([
           // Add more routes here later
           // { path: 'users',     element: <UsersPage /> },
           // { path: 'analytics', element: <AnalyticsPage /> },
-          // { path: 'products',  element: <ProductsPage /> },
+          { path: 'products',  element: <ProductsPage /> },
         ],
       },
     ],

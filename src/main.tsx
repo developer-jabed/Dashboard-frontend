@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { router } from './router';
 import { ThemeProvider } from './provider/ThemeProvider';
+import { useAuthStore } from './store/auth-store';
 
 
 const queryClient = new QueryClient({
@@ -18,6 +19,8 @@ const queryClient = new QueryClient({
     },
   },
 })
+
+useAuthStore.getState().checkAuth()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

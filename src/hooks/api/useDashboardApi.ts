@@ -1,34 +1,44 @@
-import { useQuery, useQueryClient, type UseQueryOptions } from '@tanstack/react-query';
-import { fetcher } from '../../utils/api/apiClient';
-import { API_ENDPOINTS } from '../../constant/apiEndpoints';
+// src/hooks/api/useDashboardApi.ts
+import { useQuery, useQueryClient, type UseQueryOptions } from '@tanstack/react-query'
+import { fetcher } from '../../utils/api/apiClient'
+import { API_ENDPOINTS } from '../../constant/apiEndpoints'
 
 export interface User {
-  id: number;
-  name: string;
-  email: string;
-  status: 'active' | 'inactive';
-  joinDate: string;
+  id: number
+  name: string
+  email: string
+  status: 'active' | 'inactive'
+  joinDate: string
 }
 
 export interface Product {
-  id: number;
-  name: string;
-  price: number;
-
+  id: number
+  name: string
+  price: number
+  sales: number
+  category: string
 }
 
 export interface OverviewData {
-  totalUsers: number;
-  activeUsers: number;
-  totalProducts: number;
+  totalUsers: number
+  activeUsers: number
+  totalProducts: number
+  revenue: number
+  growth: number
+}
 
+export interface AnalyticsData {
+  date: string
+  views: number
+  clicks: number
+  conversions: number
 }
 
 export interface DashboardSummary {
-  overview: OverviewData;
-  recentUsers: User[];
-  topProducts: Product[];
-  // add more fields as needed
+  overview: OverviewData
+  recentUsers: User[]
+  topProducts: Product[]
+  analytics: AnalyticsData[]
 }
 
 
@@ -39,7 +49,7 @@ export function useUsersList(
     queryKey: ['users', 'list'],
     queryFn: () => fetcher<User[]>(API_ENDPOINTS.USERS.LIST),
     ...options,
-  });
+  })
 }
 
 export function useUserById(
@@ -51,7 +61,7 @@ export function useUserById(
     queryFn: () => fetcher<User>(API_ENDPOINTS.USERS.BY_ID(userId!)),
     enabled: !!userId,
     ...options,
-  });
+  })
 }
 
 export function useOverview(
@@ -61,7 +71,7 @@ export function useOverview(
     queryKey: ['overview'],
     queryFn: () => fetcher<OverviewData>(API_ENDPOINTS.OVERVIEW),
     ...options,
-  });
+  })
 }
 
 export function useProductsList(
@@ -71,7 +81,17 @@ export function useProductsList(
     queryKey: ['products', 'list'],
     queryFn: () => fetcher<Product[]>(API_ENDPOINTS.PRODUCTS.LIST),
     ...options,
-  });
+  })
+}
+
+export function useAnalytics(
+  options?: Omit<UseQueryOptions<AnalyticsData[], Error>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery<AnalyticsData[], Error>({
+    queryKey: ['analytics'],
+    queryFn: () => fetcher<AnalyticsData[]>(API_ENDPOINTS.ANALYTICS),
+    ...options,
+  })
 }
 
 export function useDashboardAll(
@@ -81,23 +101,24 @@ export function useDashboardAll(
     queryKey: ['dashboard', 'all'],
     queryFn: () => fetcher<DashboardSummary>(API_ENDPOINTS.DASHBOARD.ALL),
     ...options,
-  });
+  })
 }
 
 
 export function useInvalidateUsers() {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   return () => {
-    queryClient.invalidateQueries({ queryKey: ['users'] });
-  };
+    queryClient.invalidateQueries({ queryKey: ['users'] })
+  }
 }
 
 export function useInvalidateDashboard() {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   return () => {
-    queryClient.invalidateQueries({ queryKey: ['dashboard'] });
-    queryClient.invalidateQueries({ queryKey: ['overview'] });
-    queryClient.invalidateQueries({ queryKey: ['users'] });
-    queryClient.invalidateQueries({ queryKey: ['products'] });
-  };
+    queryClient.invalidateQueries({ queryKey: ['dashboard'] })
+    queryClient.invalidateQueries({ queryKey: ['overview'] })
+    queryClient.invalidateQueries({ queryKey: ['users'] })
+    queryClient.invalidateQueries({ queryKey: ['products'] })
+    queryClient.invalidateQueries({ queryKey: ['analytics'] })
+  }
 }
