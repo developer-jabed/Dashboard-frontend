@@ -98,20 +98,22 @@ Pagination
 Navigate through large lists smoothly
 
 ## Screenshots
+## Screenshots
 
-<div align="center">
-  <table>
-    <tr>
-      <td><img src="https://i.postimg.cc/HLRjjxQ4/Screenshot-(78).png" alt="Dashboard Overview" width="400"/><br><sub>1. Dashboard Overview</sub></td>
-      <td><img src="https://i.postimg.cc/sXWxWrc6/Screenshot-(79).png" alt="User Management" width="400"/><br><sub>2. User Management</sub></td>
-    </tr>
-    <tr>
-      <td><img src="https://i.postimg.cc/4dcycg51/Screenshot-(80).png" alt="Product Management" width="400"/><br><sub>3. Product Management</sub></td>
-      <td><img src="https://i.postimg.cc/1tFXFQHM/Screenshot-(81).png" alt="Analytics Dashboard" width="400"/><br><sub>4. Analytics Dashboard</sub></td>
-    </tr>
-    <tr>
-      <td><img src="https://i.postimg.cc/85vcvSHy/Screenshot-(82).png" alt="About Page" width="400"/><br><sub>5. About Page</sub></td>
-      <td><img src="https://i.postimg.cc/SRps7v14/Screenshot-(83).png" alt="Login Page" width="400"/><br><sub>6. Login Page</sub></td>
-    </tr>
-  </table>
-</div>
+1. **Dashboard Overview**  
+   ![Dashboard Overview](https://i.postimg.cc/HLRjjxQ4/Screenshot-(78).png)
+
+2. **User Management**  
+   ![User Management](https://i.postimg.cc/sXWxWrc6/Screenshot-(79).png)
+
+3. **Product Management**  
+   ![Product Management](https://i.postimg.cc/4dcycg51/Screenshot-(80).png)
+
+4. **Analytics Dashboard**  
+   ![Analytics Dashboard](https://i.postimg.cc/1tFXFQHM/Screenshot-(81).png)
+
+5. **About Page**  
+   ![About Page](https://i.postimg.cc/85vcvSHy/Screenshot-(82).png)
+
+6. **Login Page**  
+   ![Login Page](https://i.postimg.cc/SRps7v14/Screenshot-(83).png)
