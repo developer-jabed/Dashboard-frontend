@@ -97,12 +97,21 @@ Use search, status/date filters, sort by any column
 Pagination
 Navigate through large lists smoothly
 
-📸 Screenshots
-<img src="https://i.postimg.cc/HLRjjxQ4/Screenshot-(78).png" alt="Dashboard Overview">
-<img src="https://i.postimg.cc/sXWxWrc6/Screenshot-(79).png" alt="Analytics View">
-<img src="https://i.postimg.cc/4dcycg51/Screenshot-(80).png" alt="Products Management">
-<img src="https://i.postimg.cc/1tFXFQHM/Screenshot-(81).png" alt="Pricing Plans">
-<img src="https://i.postimg.cc/85vcvSHy/Screenshot-(82).png" alt="Links Management">
-<img src="https://i.postimg.cc/SRps7v14/Screenshot-(83).png" alt="Filtering &#x26; Sorting">
+## Screenshots
 
-
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="https://i.postimg.cc/HLRjjxQ4/Screenshot-(78).png" alt="Dashboard Overview" width="400"/><br><sub>1. Dashboard Overview</sub></td>
+      <td><img src="https://i.postimg.cc/sXWxWrc6/Screenshot-(79).png" alt="User Management" width="400"/><br><sub>2. User Management</sub></td>
+    </tr>
+    <tr>
+      <td><img src="https://i.postimg.cc/4dcycg51/Screenshot-(80).png" alt="Product Management" width="400"/><br><sub>3. Product Management</sub></td>
+      <td><img src="https://i.postimg.cc/1tFXFQHM/Screenshot-(81).png" alt="Analytics Dashboard" width="400"/><br><sub>4. Analytics Dashboard</sub></td>
+    </tr>
+    <tr>
+      <td><img src="https://i.postimg.cc/85vcvSHy/Screenshot-(82).png" alt="About Page" width="400"/><br><sub>5. About Page</sub></td>
+      <td><img src="https://i.postimg.cc/SRps7v14/Screenshot-(83).png" alt="Login Page" width="400"/><br><sub>6. Login Page</sub></td>
+    </tr>
+  </table>
+</div>
