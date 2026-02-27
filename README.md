@@ -1,73 +1,108 @@
-# React + TypeScript + Vite
+# Dashboard View – Modern  Dashboard (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcn/ui&logoColor=white)](https://ui.shadcn.com)
+[![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-Currently, two official plugins are available:
+Modern, responsive  dashboard frontend built with React, TypeScript, Tailwind CSS and shadcn/ui.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Connects to any backend API to manage users, links, products, pricing plans, analytics, and more.
 
-## React Compiler
+Live Demo → https://dashboard-view-website.vercel.app
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+GitHub Repository → https://github.com/developer-jabed/Dashboard-frontend
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 📊 Real-time analytics overview (views, clicks, conversions)
+- 🔗 Manage short links (create, edit, delete, analytics)
+- 🛒 Products management (add, edit, remove products)
+- 💰 Pricing plans (create, update, delete pricing tiers)
+- 🔍 Advanced filtering, sorting & search
+- 📄 Pagination with smooth navigation
+- 📱 Fully responsive & mobile-friendly
+- 🌙 Dark mode support
+- ⚡ Fast & lightweight (Vite + React)
+- 🎨 Clean UI with glassmorphism & smooth animations
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Demo Credentials
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Use these to log in to the live demo:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Email**: `user1@example.com`
+- **Password**: `password123`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Category          | Technology              | Purpose                              |
+|-------------------|-------------------------|--------------------------------------|
+| Framework         | React 18 / 19           | UI library                           |
+| Build Tool        | Vite                    | Fast dev server & build              |
+| Language          | TypeScript              | Type safety                          |
+| Styling           | Tailwind CSS            | Utility-first CSS                    |
+| Components        | shadcn/ui               | Beautiful, accessible UI             |
+| Forms             | React Hook Form + Zod   | Type-safe form handling              |
+| Data Fetching     | TanStack Query          | Server-state & caching               |
+| Charts            | Recharts                | Responsive visualizations            |
+| Icons             | Lucide React            | Modern icon set                      |
+| Animations        | Framer Motion           | Smooth transitions                   |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js ≥ 18.17
+- pnpm / npm / yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/developer-jabed/Dashboard-frontend.git
+cd Dashboard-frontend
+
+# Install dependencies
+npm install
+
+# Copy example env (adjust VITE_API_URL to your backend)
+cp .env.example .env.local
+
+# Start development server
+npm dev
+
+Open → http://localhost:5173
+Build for production
+Bashpnpm build
+pnpm preview
+🔧 Environment Variables (.env.local)
+
+
+📖 How to Use the Dashboard
+
+Login
+Use demo credentials: user1@example.com / password123
+Dashboard Overview
+See key metrics (views, clicks, conversions, active users, revenue)
+Manage Links
+Create short links, edit/delete, view per-link analytics
+Products
+Add, edit, remove products with images & details
+Pricing Plans
+Create/update/delete subscription tiers & features
+Filtering & Sorting
+Use search, status/date filters, sort by any column
+Pagination
+Navigate through large lists smoothly
+
+📸 Screenshots
+<img src="https://i.postimg.cc/HLRjjxQ4/Screenshot-(78).png" alt="Dashboard Overview">
+<img src="https://i.postimg.cc/sXWxWrc6/Screenshot-(79).png" alt="Analytics View">
+<img src="https://i.postimg.cc/4dcycg51/Screenshot-(80).png" alt="Products Management">
+<img src="https://i.postimg.cc/1tFXFQHM/Screenshot-(81).png" alt="Pricing Plans">
+<img src="https://i.postimg.cc/85vcvSHy/Screenshot-(82).png" alt="Links Management">
+<img src="https://i.postimg.cc/SRps7v14/Screenshot-(83).png" alt="Filtering &#x26; Sorting">
+
+

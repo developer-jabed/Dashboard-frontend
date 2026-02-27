@@ -6,6 +6,7 @@ import LoginPage from '@/pages/auth/Login'
 import ProductsPage from '@/pages/Dashboard/Product'
 import UserPage from '@/pages/Dashboard/User'
 import AnalyticsPage from '@/pages/Dashboard/analytics'
+import AboutApp from '@/pages/Dashboard/AboutApp'
 
 
 export const router = createBrowserRouter([
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
           { path: 'users',     element: <UserPage /> },
           { path: 'analytics', element: <AnalyticsPage /> },
           { path: 'products',  element: <ProductsPage /> },
+          { path: 'about',  element: <AboutApp /> },
         ],
       },
     ],

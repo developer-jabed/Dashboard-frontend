@@ -1,7 +1,7 @@
 // src/components/app-sidebar.tsx
 import { NavLink, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
-import { Home, LineChart, Package, Users, LogOut,  } from "lucide-react"
+import { Home, LineChart, Package, Users, LogOut, Info  } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -21,6 +21,7 @@ const navItems = [
   { title: "Users", url: "/users", icon: Users },
   { title: "Products", url: "/products", icon: Package },
   { title: "Analytics", url: "/analytics", icon: LineChart },
+  { title: "About App", url: "/about", icon: Info },
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
